@@ -1,1 +1,4 @@
 dist/
+dist/floppy.img
+dist/kernel.img
+dist/kernel.o
