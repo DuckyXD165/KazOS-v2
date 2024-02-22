@@ -1,6 +1,6 @@
 void initKernel() {
     // Example usage of printf function
-    printf("H -Bootloader");
+    printf("Booting...");
 
     hlt();
 }
