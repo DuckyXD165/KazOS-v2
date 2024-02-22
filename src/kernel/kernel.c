@@ -1,5 +1,7 @@
 #include "printf.h"
-#include "kernel.h"
+
+void hlt(); // Function prototype for hlt()
+
 void initKernel() {
     printf("Booting...");
     hlt();
