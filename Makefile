@@ -18,6 +18,7 @@ release:
 
 start: dist/floppy.img
 	#qemu-system-i386 -m 128M -drive format=raw,file=dist/floppy.img
+	VBoxManage startvm Test
 
 dist/boot1.o: src/boot/boot1.asm
 	nasm -f elf -o $@ $<
