@@ -65,6 +65,6 @@ void printString(const char *str) {
 
 void hlt() {
     while (1) {
-        // Infinite loop to halt CPU
+        asm volatile("hlt");
     }
 }

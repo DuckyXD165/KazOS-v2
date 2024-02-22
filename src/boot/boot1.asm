@@ -4,8 +4,7 @@
 global _start
 
 _start:
-	sti
-
+	cli
 	call initKernel
 
 	jmp $

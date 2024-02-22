@@ -1,9 +1,2 @@
-# Assembly Bootloader
-
-**Features**
-- Two-Stage Bootloader
-- Protected Mode
-- 32 Bit
-- GDT
-- C++ / C Kernel
-- IDT 
+# KazOS Update timeline
+Just accomplished jumping to a C kernel. 2/21/24
