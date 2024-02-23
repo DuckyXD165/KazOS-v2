@@ -2,8 +2,12 @@
 #define VIDEO_MEMORY_ADDRESS 0xB8000
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 25
+static int cursor = 0;
 void printf(const char *format, ...) {
     // Pointer to traverse the format string
+    if (cursor > (SCREEN_WIDTH*SCREEN_HEIGHT)) {
+    newLine();
+}
     const char *ptr = format;
 
     // Initialize variable arguments
@@ -41,7 +45,6 @@ void printf(const char *format, ...) {
 
 void printChar(char chara) {
     char *video_memory = (char *)0xB8000;
-    static int cursor = 0; // Static variable to keep track of cursor position
     char letter = chara;
 
     // Attribute byte: white on black
@@ -65,7 +68,7 @@ void printString(const char *str) {
 }
 
 void newLine() {
-    static int cursor = 0;
+    
     cursor = (cursor / 80 + 1) * 80; // Move cursor to the start of the next line
     if (cursor >= 80 * 25) {
         // If the cursor reaches the end of the screen, scroll the screen up
@@ -75,7 +78,6 @@ void newLine() {
 }
 
 void scrollScreen() {
-    printf("\n Screen shouldve scrolled...");
     // Pointer to video memory
     char *video_memory = (char *)VIDEO_MEMORY_ADDRESS;
     

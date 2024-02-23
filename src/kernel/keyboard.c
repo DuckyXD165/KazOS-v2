@@ -11,24 +11,21 @@ void process_key(unsigned char scan_code) {
 // Implement the functions declared in keyboard.h
 
 void keyboard_init() {
-    printf("Keyboard is initializing");
+    printf("Keyboard is initializing...\n");
 }
 
 void keyboard_interrupt_handler() {
-    // You would typically implement this in your kernel's interrupt handling routine
-    // Read the scan code and process it
+
     unsigned char scan_code = read_keyboard_scan_code();
     // Process the scan code
     process_key(scan_code);
 }
 
 void enable_keyboard_interrupts() {
-    // You would implement this to enable interrupts on the keyboard controller
-    // For example, for PS/2 keyboard, you would send a command to enable interrupts
 }
 
 void disable_keyboard_interrupts() {
-    // You would implement this to disable interrupts on the keyboard controller
+
 }
 
 int is_keyboard_data_available() {
