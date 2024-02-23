@@ -1,16 +1,17 @@
 #include "printf.h"
 #include "keyboard.h"
+#include "shell.h"
 
 void hlt(); // Function prototype for hlt()
 
 void initKernel() {
     printf("Booting...\n");
-    keyboard_init();
+    initShell();
     hlt();
 }
 
 void hlt() {
-    printf("System Has reached end of kernel! Halting CPU...");
+    printf("\nSystem has reached end of kernel! Halting CPU...");
     while (1) {
         asm volatile("hlt");
     }
