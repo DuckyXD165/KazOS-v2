@@ -1,5 +1,4 @@
 #include "printf.h"
-#include "keyboard.h"
 #include "shell.h"
 
 void hlt(); // Function prototype for hlt()
