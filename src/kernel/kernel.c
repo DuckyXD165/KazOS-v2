@@ -2,6 +2,7 @@
 #include "shell.h"
 
 void hlt(); // Function prototype for hlt()
+void panic();
 
 void initKernel() {
     printf("Booting...\n");
