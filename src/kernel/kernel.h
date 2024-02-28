@@ -3,5 +3,6 @@
 
 void initKernel();
 void hlt();
+void panic();
 
 #endif /* KERNEL_H */

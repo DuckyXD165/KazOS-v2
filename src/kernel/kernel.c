@@ -15,3 +15,10 @@ void hlt() {
         asm volatile("hlt");
     }
 }
+
+void panic() {
+    printf("\nPANIC PANIC PANIC! Halting CPU!");
+    while (1) {
+        asm volatile("hlt");
+    }
+}
