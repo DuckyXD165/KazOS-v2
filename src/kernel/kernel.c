@@ -1,13 +1,14 @@
 #include "printf.h"
 #include "shell.h"
 
-void hlt(); // Function prototype for hlt()
+void hlt();
 void panic();
 
 void initKernel() {
     printf("Booting...\n");
     initShell();
     hlt();
+    //panic();
 }
 
 void hlt() {
@@ -18,7 +19,7 @@ void hlt() {
 }
 
 void panic() {
-    printf("\n=== FATAL ERROR: KERNEL PANIC === CPU OPERATION HALTED ===");
+    printf("\nFATAL ERROR / KERNEL PANIC:\n      KazOS has encountered a severe error and cannot continue.\n      CPU operation has been halted for safety.");
     while (1) {
         asm volatile("hlt");
     }
