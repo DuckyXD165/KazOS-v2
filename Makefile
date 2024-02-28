@@ -5,7 +5,8 @@ SRC = $(wildcard src/kernel/*.c)
 SRC += $(wildcard src/kernel/**/*.c)
 OBJ = $(patsubst src/kernel/%.c, dist/%.o, $(SRC))
 
-all: preclean dist/floppy.img release start
+Normal: preclean dist/floppy.img release start preclean
+LessClean: preclean dist/floppy.img release start
 
 preclean: 
 	rm -rf dist/
