@@ -1,5 +1,6 @@
 #include "printf.h"
 #include "shell.h"
+#include "cat.h"
 
 void hlt();
 void panic();

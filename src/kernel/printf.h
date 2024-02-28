@@ -43,4 +43,9 @@ void newLine();
  */
 void scrollScreen();
 
+/**
+ * @brief Clears the screen. (Okay, look, what else were you expecting????)
+*/
+void clearScreen();
+
 #endif /* PRINTF_H */

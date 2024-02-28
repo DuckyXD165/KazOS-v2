@@ -3,6 +3,19 @@
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 25
 static int cursor = 0;
+
+void clearScreen() {
+    // Clear the entire screen by printing spaces
+    for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
+        printChar(' ');
+    }
+    cursor = 0;
+}
+
+
+
+
+
 void printf(const char *format, ...) {
     // Pointer to traverse the format string
     if (cursor > (SCREEN_WIDTH*SCREEN_HEIGHT)) {
