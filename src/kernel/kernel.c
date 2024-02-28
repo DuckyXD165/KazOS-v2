@@ -8,6 +8,7 @@ void panic();
 void initKernel() {
     printf("Booting...\n");
     initShell();
+    cat();
     hlt();
     //panic();
 }
