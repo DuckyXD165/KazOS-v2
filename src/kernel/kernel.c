@@ -18,7 +18,7 @@ void hlt() {
 }
 
 void panic() {
-    printf("\nPANIC PANIC PANIC! Halting CPU!");
+    printf("\n=== FATAL ERROR: KERNEL PANIC === CPU OPERATION HALTED ===");
     while (1) {
         asm volatile("hlt");
     }
