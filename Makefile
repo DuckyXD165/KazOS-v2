@@ -7,7 +7,7 @@ OBJ = $(patsubst src/kernel/%.c, dist/%.o, $(SRC))
 
 all: preclean dist/floppy.img release start
 
-preclean: 
+preclean:
 	rm -rf dist/
 	mkdir dist/
 
