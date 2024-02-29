@@ -3,7 +3,6 @@
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 25
 static int cursor = 0;
-
 void clearScreen() {
     // Clear the entire screen by printing spaces
     for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
@@ -11,21 +10,14 @@ void clearScreen() {
     }
     cursor = 0;
 }
-
-
-
-
-
 void printf(const char *format, ...) {
     // Pointer to traverse the format string
     if (cursor > (SCREEN_WIDTH*SCREEN_HEIGHT)) {
     newLine();
 }
     const char *ptr = format;
-
     // Initialize variable arguments
     void *args = (void *)&format + sizeof(format);
-
     // Process each character in the format string
     while (*ptr != '\0') {
         // If current character is '%', it indicates a format specifier
@@ -54,24 +46,14 @@ void printf(const char *format, ...) {
         ptr++; // Move to next character in format string
     }
 }
-
-
 void printChar(char chara) {
     char *video_memory = (char *)0xB8000;
     char letter = chara;
-
-    // Attribute byte: white on black
     unsigned char attribute_byte = 0x0F;
-
-    // Write the letter to the video memory
     *(video_memory + (cursor * 2)) = letter;
-    // Next byte is the attribute byte
     *(video_memory + (cursor * 2) + 1) = attribute_byte;
-
-    // Move cursor to the next position
     cursor++;
 }
-
 void printString(const char *str) {
     // Print each character in the string
     while (*str != '\0') {
@@ -79,9 +61,7 @@ void printString(const char *str) {
         str++;
     }
 }
-
-void newLine() {
-    
+void newLine() {   
     cursor = (cursor / 80 + 1) * 80; // Move cursor to the start of the next line
     if (cursor >= 80 * 25) {
         // If the cursor reaches the end of the screen, scroll the screen up
@@ -89,11 +69,9 @@ void newLine() {
         cursor = 80 * 24; // Move cursor to the last line
     }
 }
-
 void scrollScreen() {
     // Pointer to video memory
     char *video_memory = (char *)VIDEO_MEMORY_ADDRESS;
-    
     // Copy each line to the line above it
     for (int y = 1; y < SCREEN_HEIGHT; y++) {
         for (int x = 0; x < SCREEN_WIDTH; x++) {
@@ -106,7 +84,6 @@ void scrollScreen() {
             video_memory[offset_above + 1] = video_memory[offset_current + 1];
         }
     }
-
     // Clear the last line
     for (int x = 0; x < SCREEN_WIDTH; x++) {
         // Calculate the offset for the last line in the video memory
