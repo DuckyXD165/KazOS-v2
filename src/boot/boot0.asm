@@ -2,6 +2,10 @@
 [BITS 16]
 global start
 start:
+	in al, 0x92 ;enable A20 with fast A20
+	or al, 2
+	out 0x92, al
+
 	xor ax, ax
 	mov es, ax
 	mov ds, ax
@@ -49,7 +53,7 @@ InitProtected:
 	jmp $
 	RET
 BOOT_DRIVE: db 0
-KERNEL_OFFSET equ 0x1000
+KERNEL_OFFSET equ 0x1000 ;TODO: modify kernel offset
 SECTORS equ 15
 gdt:                
 gdt_null:
