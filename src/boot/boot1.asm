@@ -2,43 +2,6 @@
 global _start
 _start:
 	cli
-	mov eax, '3'
-    mov [VIDEO_MEMORY], ax
-	mov eax, '2'
-	mov [VIDEO_MEMORY + 2], ax
-	mov eax, ' '
-	mov [VIDEO_MEMORY + 4], ax
-	mov eax, 'B'
-	mov [VIDEO_MEMORY + 6], ax
-	mov eax, 'I'
-	mov [VIDEO_MEMORY + 8], ax
-	mov eax, 'T'
-	mov [VIDEO_MEMORY + 10], ax
-	mov eax, ' '
-	mov [VIDEO_MEMORY + 12], ax
-	mov eax, 'P'
-	mov [VIDEO_MEMORY + 14], ax
-	mov eax, 'R'
-	mov [VIDEO_MEMORY + 16], ax
-	mov eax, 'O'
-	mov [VIDEO_MEMORY + 18], ax
-	mov eax, 'T'
-	mov [VIDEO_MEMORY + 20], ax
-	mov eax, 'E'
-	mov [VIDEO_MEMORY + 22], ax
-	mov eax, 'C'
-	mov [VIDEO_MEMORY + 24], ax
-	mov eax, 'T'
-	mov [VIDEO_MEMORY + 26], ax
-	mov eax, 'E'
-	mov [VIDEO_MEMORY + 28], ax
-	mov eax, 'D'
-	mov [VIDEO_MEMORY + 30], ax
-
-
-
-
-
 	mov eax, 0x1000
 	mov cr3, eax ; Load 0x1000 into cr3
 	mov dword [0x1000], 0x2003 ;first entry of PML4T points to PDPT
@@ -70,12 +33,11 @@ _start:
 	or eax, 1 << 31
 	or eax, 1 << 16
 	mov cr0, eax
-
-	mov byte [gdt_cs + 5], 10101111b
-	mov byte [gdt_ds + 5], 10101111b
+	
+	mov byte [gdt_cs + 6], 10101111b
+	mov byte [gdt_ds + 6], 10101111b
 	[BITS 64]
 	[EXTERN initKernel]
-	
     call initKernel
 	jmp $
 	RET
@@ -96,11 +58,3 @@ db 0
 db 10010010b
 db 11001111b
 db 0
-
-; Video Definitions
-
-section .data
-    VIDEO_MEMORY equ 0xb8000 ; Video memory address for text mode
-
-section .text
-    global _start

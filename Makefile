@@ -8,6 +8,7 @@ SRC += $(wildcard src/kernel/**/*.c)
 OBJ = $(patsubst src/kernel/%.c, dist/%.o, $(SRC))
 
 all: preclean dist/floppy.img release start
+bug: preclean dist/floppy.img release debug
 
 preclean:
 	rm -rf dist/
