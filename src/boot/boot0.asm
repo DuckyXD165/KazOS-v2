@@ -53,7 +53,7 @@ InitProtected:
 	jmp $
 	RET
 BOOT_DRIVE: db 0
-KERNEL_OFFSET equ 0x1000 ;TODO: modify kernel offset
+KERNEL_OFFSET equ 0x8000
 SECTORS equ 15
 gdt:                
 gdt_null:

@@ -1,6 +1,8 @@
 GCC = i586-elf-gcc
 LD = i586-elf-ld
 
+KERNOFFSET = 0x8000
+
 SRC = $(wildcard src/kernel/*.c)
 SRC += $(wildcard src/kernel/**/*.c)
 OBJ = $(patsubst src/kernel/%.c, dist/%.o, $(SRC))
@@ -14,7 +16,10 @@ preclean:
 release:
 	rm -f dist/boot0.bin
 	rm -f dist/boot1.o
+	rm -f dist/boot2.o
 	rm -f dist/kernel.bin
+debug: dist/floppy.img
+	qemu-system-i386 -m 128M -s -S -drive format=raw,file=dist/floppy.img
 
 start: dist/floppy.img
 	qemu-system-i386 -m 128M -drive format=raw,file=dist/floppy.img
@@ -30,7 +35,7 @@ dist/%.o: src/kernel/%.c
 	$(GCC) -nostdlib -nostdinc -ffreestanding -o $@ -c $<
 
 dist/kernel.bin: dist/boot1.o $(OBJ)
-	$(LD) -Ttext 0x1000 -o $@ $^ --oformat binary
+	$(LD) -Ttext $(KERNOFFSET) -o $@ $^ --oformat binary
 
 dist/kernel.img: dist/boot0.bin dist/kernel.bin
 	cat $^ > $@

@@ -1,15 +1,51 @@
 [BITS 32]
-[EXTERN initKernel]
 global _start
 _start:
 	cli
-	
-	mov cr3, 0x1000 ;set cr3 to PML4T
+	mov eax, '3'
+    mov [VIDEO_MEMORY], ax
+	mov eax, '2'
+	mov [VIDEO_MEMORY + 2], ax
+	mov eax, ' '
+	mov [VIDEO_MEMORY + 4], ax
+	mov eax, 'B'
+	mov [VIDEO_MEMORY + 6], ax
+	mov eax, 'I'
+	mov [VIDEO_MEMORY + 8], ax
+	mov eax, 'T'
+	mov [VIDEO_MEMORY + 10], ax
+	mov eax, ' '
+	mov [VIDEO_MEMORY + 12], ax
+	mov eax, 'P'
+	mov [VIDEO_MEMORY + 14], ax
+	mov eax, 'R'
+	mov [VIDEO_MEMORY + 16], ax
+	mov eax, 'O'
+	mov [VIDEO_MEMORY + 18], ax
+	mov eax, 'T'
+	mov [VIDEO_MEMORY + 20], ax
+	mov eax, 'E'
+	mov [VIDEO_MEMORY + 22], ax
+	mov eax, 'C'
+	mov [VIDEO_MEMORY + 24], ax
+	mov eax, 'T'
+	mov [VIDEO_MEMORY + 26], ax
+	mov eax, 'E'
+	mov [VIDEO_MEMORY + 28], ax
+	mov eax, 'D'
+	mov [VIDEO_MEMORY + 30], ax
+
+
+
+
+
+	mov eax, 0x1000
+	mov cr3, eax ; Load 0x1000 into cr3
 	mov dword [0x1000], 0x2003 ;first entry of PML4T points to PDPT
 	mov dword [0x2000], 0x3003 ;first entry of PDPT points to PDT
 	mov dword [0x3000], 0x4003 ;first entry of PDT points to PT
 
-	
+
 	mov ecx, 0
 	.idmap:
 		mov eax, 0x200000 ;page size - 2MiB
@@ -35,12 +71,36 @@ _start:
 	or eax, 1 << 16
 	mov cr0, eax
 
-	mov [foo], byte 10101111b
-	mov [bar], byte 10101111b
+	mov byte [gdt_cs + 5], 10101111b
+	mov byte [gdt_ds + 5], 10101111b
+	[BITS 64]
+	[EXTERN initKernel]
 	
-	jmp 8:kernel_load
+    call initKernel
+	jmp $
 	RET
 
-kernel_load:
-	call initKernel
-	jmp $
+
+; GDT Flag/limit byte definitions
+gdt_cs:
+dw 0xffff
+dw 0
+db 0
+db 10011010b
+db 11001111b
+db 0
+gdt_ds:
+dw 0xffff
+dw 0
+db 0
+db 10010010b
+db 11001111b
+db 0
+
+; Video Definitions
+
+section .data
+    VIDEO_MEMORY equ 0xb8000 ; Video memory address for text mode
+
+section .text
+    global _start
