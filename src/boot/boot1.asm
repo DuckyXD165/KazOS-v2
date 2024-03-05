@@ -1,7 +1,18 @@
 [BITS 32]
+[EXTERN initKernel]
 global _start
 _start:
 	cli
+
+
+
+    call initKernel
+	jmp $
+	RET
+
+
+
+
 	mov eax, 0x1000
 	mov cr3, eax ; Load 0x1000 into cr3
 	mov dword [0x1000], 0x2003 ;first entry of PML4T points to PDPT
@@ -37,7 +48,6 @@ _start:
 	mov byte [gdt_cs + 6], 10101111b
 	mov byte [gdt_ds + 6], 10101111b
 	[BITS 64]
-	[EXTERN initKernel]
     call initKernel
 	jmp $
 	RET
