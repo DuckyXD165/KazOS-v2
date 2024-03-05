@@ -1,5 +1,5 @@
 # Introductory
-Welcome to the offical KazOS Github repository. This is where the source code to KazOS will be.
+Welcome to the official KazOS Github repository. This is where the source code to KazOS will be.
 
 ## Building KazOS
 To Build KazOS follow these steps. This guide assumes you are using Homebrew as a package manager. If you aren't using brew and you need the packages, See "Used Packages".
